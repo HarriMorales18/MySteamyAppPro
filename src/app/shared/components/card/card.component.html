@@ -12,6 +12,13 @@
   <ion-card-header>
     <div class="card-header">
       <ion-card-title>{{ game.title }}</ion-card-title>
+      <img
+        *ngIf="game?.storeIcon || game?.storeID"
+        class="store-icon"
+        [src]="game.storeIcon || getStoreIconUrl(game.storeID)"
+        [attr.alt]="game.storeName || 'Store'"
+        loading="lazy"
+      />
     </div>
   </ion-card-header>
   <ion-card-content>

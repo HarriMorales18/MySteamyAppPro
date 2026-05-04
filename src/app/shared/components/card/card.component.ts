@@ -11,6 +11,14 @@ export class CardComponent {
   @Input() isFavorite: boolean = false;
   @Output() onFavorite = new EventEmitter<any>();
 
+  getStoreIconUrl(storeID: string | number | undefined): string {
+    if (!storeID) {
+      return '';
+    }
+
+    return `https://www.cheapshark.com/img/stores/icons/${storeID}.png`;
+  }
+
   handleFavorite(event: Event) {
     event.stopPropagation();
     this.onFavorite.emit(this.game);

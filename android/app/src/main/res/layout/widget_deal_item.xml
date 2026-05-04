@@ -8,24 +8,41 @@
   <LinearLayout
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:layout_alignParentLeft="true">
+    android:orientation="horizontal"
+    android:layout_alignParentLeft="true"
+    android:layout_centerVertical="true"
+    android:gravity="center_vertical">
 
-    <TextView
-      android:id="@+id/widget_store"
+    <ImageView
+      android:id="@+id/widget_store_icon"
+      android:layout_width="24dp"
+      android:layout_height="24dp"
+      android:layout_marginEnd="8dp"
+      android:scaleType="fitCenter"
+      android:contentDescription="Store Icon" />
+
+    <LinearLayout
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="Epic Games Store"
-      android:textColor="#EEEEEE"
-      android:textSize="11sp" />
+      android:orientation="vertical">
 
-    <TextView
-      android:id="@+id/widget_normal_price"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:text="$89.99"
-      android:textColor="#AAAAAA"
-      android:textSize="10sp" />
+      <TextView
+        android:id="@+id/widget_store"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Epic Games Store"
+        android:textColor="#EEEEEE"
+        android:textSize="11sp" />
+
+      <TextView
+        android:id="@+id/widget_normal_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="$89.99"
+        android:textColor="#AAAAAA"
+        android:textSize="10sp" />
+    </LinearLayout>
+
   </LinearLayout>
 
   <LinearLayout

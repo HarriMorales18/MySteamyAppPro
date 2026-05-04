@@ -21,6 +21,7 @@ export class DealsPage implements OnInit {
   currentFavoriteId: string | null = null; 
 
   storesMap: { [key: string]: string } = {}; 
+  storeIconMap: { [key: string]: string } = {};
 
   constructor(private gameProvider: GameProviderService) {}
 
@@ -48,13 +49,19 @@ export class DealsPage implements OnInit {
     this.gameProvider.getStores().subscribe((storesRes: any[]) => {
       storesRes.forEach(store => {
         this.storesMap[store.storeID] = store.storeName;
+        if (store.images?.icon) {
+          this.storeIconMap[store.storeID] = `https://www.cheapshark.com${store.images.icon}`;
+        }
       });
+
+      this.topDeals = this.applyStoreMetadata(this.topDeals);
+      this.searchResults = this.applyStoreMetadata(this.searchResults);
     });
   }
 
   loadTopDeals() {
     this.gameProvider.getTopDeals().subscribe((dealsRes: any) => {
-      this.topDeals = dealsRes;
+      this.topDeals = this.applyStoreMetadata(dealsRes);
       this.isLoading = false;
     });
   }
@@ -69,9 +76,21 @@ export class DealsPage implements OnInit {
     this.searchActive = true;
     this.isLoading = true;
     this.gameProvider.searchDeals(query).subscribe((res: any) => {
-      this.searchResults = res;
+      this.searchResults = this.applyStoreMetadata(res);
       this.isLoading = false;
     });
+  }
+
+  applyStoreMetadata(deals: any[]): any[] {
+    if (!Array.isArray(deals) || deals.length === 0) {
+      return deals;
+    }
+
+    return deals.map(deal => ({
+      ...deal,
+      storeName: this.storesMap[deal.storeID] || deal.storeName,
+      storeIcon: this.storeIconMap[deal.storeID] || deal.storeIcon,
+    }));
   }
 
   async toggleFavorite(game: any) {
@@ -87,7 +106,8 @@ export class DealsPage implements OnInit {
         
         const realDeals = details.deals.map((d: any) => ({
           storeID: d.storeID,
-          storeName: this.storesMap[d.storeID] || `Store ${d.storeID}`, 
+          storeName: this.storesMap[d.storeID] || `Store ${d.storeID}`,
+          storeIcon: this.storeIconMap[d.storeID] || '',
           salePrice: d.price,       
           normalPrice: d.retailPrice, 
           savings: d.savings
