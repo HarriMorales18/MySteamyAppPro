@@ -13,4 +13,4 @@ import { HttpService } from './services/http.service';
     HttpService
   ]
 })
-export class CoreModule { }
+export class CoreModule {}
