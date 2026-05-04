@@ -1,0 +1,31 @@
+<ion-card class="game-card">
+  <img [src]="game.thumb" class="game-img" loading="lazy" />
+  <div class="card-favorite-badge">
+    <ion-button fill="clear" (click)="handleFavorite($event)" [class.is-favorite]="isFavorite">
+      <ion-icon 
+        slot="icon-only" 
+        [name]="isFavorite ? 'heart' : 'heart-outline'" 
+        [class.is-favorite]="isFavorite">
+      </ion-icon>
+    </ion-button>
+  </div>
+  <ion-card-header>
+    <div class="card-header">
+      <ion-card-title>{{ game.title }}</ion-card-title>
+    </div>
+  </ion-card-header>
+  <ion-card-content>
+    <div class="card-meta">
+      <div class="card-prices">
+        <span class="sale-price">${{ game.salePrice }}</span>
+      </div>
+    </div>
+    <div class="card-footer">
+      <ion-badge color="tertiary">{{ game.savings | number:'1.0-0' }}% OFF</ion-badge>
+      <div class="card-rating">
+        <ion-icon name="star" class="rating-icon"></ion-icon>
+        <span>{{ game.dealRating || 'N/A' }}</span>
+      </div>
+    </div>
+  </ion-card-content>
+</ion-card>

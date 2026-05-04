@@ -1,0 +1,19 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-title>Favoritos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="favoriteGame" class="favorite-container">
+    <app-card [game]="favoriteGame" [isFavorite]="true"></app-card>
+    <ion-button expand="block" fill="outline" color="danger" (click)="removeFavorite()">
+      Quitar de Favoritos
+    </ion-button>
+  </div>
+
+  <div *ngIf="!favoriteGame" class="empty-state">
+    <ion-icon name="heart-dislike-outline"></ion-icon>
+    <p>No tienes ningún juego favorito.</p>
+  </div>
+</ion-content>

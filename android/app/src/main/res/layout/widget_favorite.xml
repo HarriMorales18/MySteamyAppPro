@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="#121212">
+
+  <LinearLayout
+    android:id="@+id/widget_empty_state"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:visibility="gone">
+
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Aún no hay favoritos 🎮"
+      android:textColor="#FFFFFF"
+      android:textSize="16sp"
+      android:textStyle="bold" />
+
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="4dp"
+      android:text="Abre la app y guarda uno"
+      android:textColor="#AAAAAA"
+      android:textSize="12sp" />
+  </LinearLayout>
+
+  <RelativeLayout
+    android:id="@+id/widget_game_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:visibility="visible">
+
+    <ImageView
+      android:id="@+id/widget_image"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:scaleType="centerCrop"
+      android:alpha="0.7" />
+
+    <TextView
+      android:id="@+id/widget_title"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:padding="12dp"
+      android:text="Nombre del Juego"
+      android:textColor="#FFFFFF"
+      android:textSize="14sp"
+      android:textStyle="bold"
+      android:shadowColor="#000000"
+      android:shadowDx="2"
+      android:shadowDy="2"
+      android:shadowRadius="3" />
+
+    <ViewFlipper
+      android:id="@+id/widget_deals_flipper"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_alignParentBottom="true"
+      android:autoStart="true"
+      android:flipInterval="5000"
+      android:inAnimation="@android:anim/fade_in"
+      android:outAnimation="@android:anim/fade_out">
+
+    </ViewFlipper>
+
+  </RelativeLayout>
+
+</RelativeLayout>

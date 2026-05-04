@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:background="#CC000000"
+  android:padding="8dp">
+
+  <LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_alignParentLeft="true">
+
+    <TextView
+      android:id="@+id/widget_store"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Epic Games Store"
+      android:textColor="#EEEEEE"
+      android:textSize="11sp" />
+
+    <TextView
+      android:id="@+id/widget_normal_price"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="$89.99"
+      android:textColor="#AAAAAA"
+      android:textSize="10sp" />
+  </LinearLayout>
+
+  <LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentRight="true"
+    android:layout_centerVertical="true"
+    android:orientation="vertical"
+    android:gravity="end">
+
+    <TextView
+      android:id="@+id/widget_sale_price"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="$4.49"
+      android:textColor="#E1FF00"
+      android:textSize="16sp"
+      android:textStyle="bold" />
+
+    <TextView
+      android:id="@+id/widget_savings"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="-95%"
+      android:textColor="#00FF41"
+      android:textSize="10sp"
+      android:textStyle="bold" />
+  </LinearLayout>
+</RelativeLayout>

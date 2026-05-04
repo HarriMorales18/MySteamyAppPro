@@ -1,0 +1,95 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-title>
+      <span class="app-name">Juegos</span><span class="app-accent">En Ofertas</span>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button class="profile-button" fill="clear">
+        <ion-icon name="person-circle-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+</ion-header>
+
+<app-input (onSearch)="handleSearch($event)"></app-input>
+
+<ion-content>
+  <div *ngIf="isLoading" class="skeleton-container">
+    <ion-card class="game-card" *ngFor="let i of [1,2,3]">
+      <ion-skeleton-text animated style="height: 150px; width: 100%;"></ion-skeleton-text>
+      <ion-card-header>
+        <ion-skeleton-text animated style="width: 80%;"></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 50%;"></ion-skeleton-text>
+      </ion-card-header>
+    </ion-card>
+  </div>
+
+  <div *ngIf="!isLoading && !searchActive">
+    <h2 class="section-title">Top Ofertas</h2>
+    <swiper-container [slidesPerView]="1.2" [spaceBetween]="15" class="swiper-container">
+      <swiper-slide *ngFor="let deal of topDeals">
+        <div (click)="openDealDetails(deal)">
+          <app-card 
+            [game]="deal" 
+            [isFavorite]="checkIsFavorite(deal)"
+            (onFavorite)="toggleFavorite($event)">
+          </app-card>
+        </div>
+      </swiper-slide>
+    </swiper-container>
+  </div>
+
+  <div *ngIf="!isLoading && searchActive">
+    <h2 class="section-title">Resultados de Búsqueda</h2>
+    <div class="grid-container">
+      <div *ngFor="let result of searchResults" (click)="openDealDetails(result)">
+        <app-card 
+          [game]="result" 
+          [isFavorite]="checkIsFavorite(result)"
+          (onFavorite)="toggleFavorite($event)">
+        </app-card>
+      </div>
+    </div>
+    <div *ngIf="searchResults.length === 0" class="empty-state">
+      <p>Ofertas no encontradas.</p>
+    </div>
+  </div>
+
+  <ion-modal #dealModal [initialBreakpoint]="1" [breakpoints]="[0, 0.5, 1]">
+    <ng-template>
+      <ion-content class="modal-content" *ngIf="selectedDeal">
+        <div class="modal-shell" [style.background-image]="'url(' + selectedDeal.thumb + ')'">
+          <ion-button fill="clear" class="modal-close" (click)="modal.dismiss()">
+            <ion-icon name="close" slot="icon-only"></ion-icon>
+          </ion-button>
+          <div class="modal-body">
+            <h2>{{ selectedDeal.title }}</h2>
+            <div class="info-cards">
+              <div class="info-card">
+                <ion-icon name="star" class="info-icon"></ion-icon>
+                <div class="info-value">{{ selectedDeal.dealRating }}</div>
+                <div class="info-label">Calificación</div>
+              </div>
+              <div class="info-card">
+                <ion-icon name="game-controller" class="info-icon"></ion-icon>
+                <div class="info-value">{{ selectedDeal.metacriticScore || 'N/A' }}</div>
+                <div class="info-label">Meta critica</div>
+              </div>
+            </div>
+            <div class="price-panel">
+              <div class="price-row">
+                <span class="sale-price">${{ selectedDeal.salePrice }}</span>
+              </div>
+              <div class="savings-text">Ahorrás {{ selectedDeal.savings | number:'1.0-0' }}%</div>
+              <span class="normal-price normal-price-right">${{ selectedDeal.normalPrice }}</span>
+            </div>
+            <ion-button expand="block" class="deal-cta" (click)="openBrowser(selectedDeal.dealID)">
+              Ver Oferta
+            </ion-button>
+          </div>
+        </div>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-content>
